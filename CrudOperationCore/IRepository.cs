@@ -14,6 +14,6 @@ namespace CrudOperationCore
         bool InsertUser(User user);
         bool DeleteUser(int UserId);
         bool UpdateUser(User user);
-        
+        int TotalUser();
     }
 }

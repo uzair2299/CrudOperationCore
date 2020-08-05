@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using CrudOperationCore.Pagination;
 
 namespace CrudOperationCore.Controllers
 {
@@ -33,10 +34,11 @@ namespace CrudOperationCore.Controllers
 
             List<User> users  = _user.GetUser(PageNo);
 
-            List<UserViewModel> UserVM = new List<UserViewModel>();
+            UserListViewModel userListViewModel = new UserListViewModel();
+            userListViewModel.pager = new Pager(_user.TotalUser(), PageNo, 10);
             foreach(var item in users)
             {
-                UserVM.Add(new UserViewModel()
+               userListViewModel.UserViewModel.Add(new UserViewModel()
                 {
                     UserId = item.UserId,
                     Name = item.Name,
@@ -46,7 +48,7 @@ namespace CrudOperationCore.Controllers
                     ProfileImagePath=item.ProfileIamge
                 });
             }
-            return View(UserVM);
+            return View(userListViewModel);
         }
 
         public IActionResult RegisterUser()

@@ -1,4 +1,5 @@
 ﻿
+using CrudOperationCore.Pagination;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -48,5 +49,6 @@ namespace CrudOperationCore.ViewModel
 
         public string SelectedCity { get; set; }
         public IEnumerable<SelectListItem> CitiesList { get; set; }
+
     }
 }

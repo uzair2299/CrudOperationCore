@@ -53,8 +53,10 @@ namespace CrudOperationCore.Models
             return false;
         }
 
-        
-
+        public int TotalUser()
+        {
+            return context.Users.Count();
+        }
 
         public bool UpdateUser(User user)
         {
