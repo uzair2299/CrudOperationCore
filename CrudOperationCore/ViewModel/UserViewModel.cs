@@ -46,6 +46,9 @@ namespace CrudOperationCore.ViewModel
         public List<SelectListItem> ProvincesList { get; set; }
 
 
+        [Display(Name = "Is School Attend")]
+        public bool? IsAttendSchool { get; set; }
+
 
         public string SelectedCity { get; set; }
         public IEnumerable<SelectListItem> CitiesList { get; set; }

@@ -31,7 +31,8 @@ namespace CrudOperationCore.Controllers
         public IActionResult Index(int? pageNo)
         {
             int PageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
-
+            //int hours = DateTime.Now.Hour;
+            //ViewBag.Greetings = hours > 12 ? "Good Morning" : "Good Evening";
             List<User> users  = _user.GetUser(PageNo);
 
             UserListViewModel userListViewModel = new UserListViewModel();
@@ -76,10 +77,10 @@ namespace CrudOperationCore.Controllers
                 ProfileIamge = fileName
             };
 
-            bool result = _user.InsertUser(user);
-            if (result)
+            var result =_user.InsertUser(user);
+            if (result!=null)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Details",new { id=result.Result.UserId});
             }
             else
             {

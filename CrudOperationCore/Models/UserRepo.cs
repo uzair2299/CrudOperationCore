@@ -42,15 +42,25 @@ namespace CrudOperationCore.Models
             return null;
         }
 
-        public bool InsertUser(User user)
+        //public User InsertUser(User user)
+        //{
+        //    if (user != null)
+        //    {
+        //      context.Users.Add(user);
+        //      context.SaveChanges();
+        //        return user;
+        //    }
+        //    return null;
+        //}
+        public async Task<User> InsertUser(User user)
         {
             if (user != null)
             {
-                context.Users.Add(user);
+                await context.Users.AddAsync(user);
                 context.SaveChanges();
-                return true;
+                return user;
             }
-            return false;
+            return null;
         }
 
         public int TotalUser()

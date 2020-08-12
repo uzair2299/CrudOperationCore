@@ -4,57 +4,83 @@
     ViewData["Title"] = "RegisterUser";
 }
 
-<h1>RegisterUser</h1>
-
-<h4>User</h4>
+<h1>Register User</h1>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row justify-content-center align-items-center">
+    <div class="col-md-6">
         <form asp-action="RegisterUser" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FatherName" class="control-label"></label>
-                <input asp-for="FatherName" class="form-control" />
-                <span asp-validation-for="FatherName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ContactNo" class="control-label"></label>
-                <input asp-for="ContactNo" class="form-control" />
-                <span asp-validation-for="ContactNo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SelectedProvince"></label>
-
-                <select asp-for="SelectedProvince" asp-items="Model.ProvincesList" asp- class="form-control">
-                   
-                </select>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="FatherName" class="control-label"></label>
+                        <input asp-for="FatherName" class="form-control" />
+                        <span asp-validation-for="FatherName" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label asp-for="SelectedCity"></label>
-
-                <select asp-for="SelectedCity" asp-items="Model.CitiesList" asp- class="form-control">
-                   
-                </select>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="ContactNo" class="control-label"></label>
+                        <input asp-for="ContactNo" class="form-control" />
+                        <span asp-validation-for="ContactNo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="SelectedProvince"></label>
+
+                        <select asp-for="SelectedProvince" asp-items="Model.ProvincesList" class="form-control">
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="SelectedCity"></label>
+
+                        <select asp-for="SelectedCity" asp-items="Model.CitiesList" class="form-control">
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                        <label asp-for="IsAttendSchool"></label>
+                        <select asp-for="IsAttendSchool" class="form-control">
+                            <option value="">Choose Right Option</option>
+                            <option value="true">Yes Attended School</option>
+                            <option value="false">Sorry Not Attended School</option>
+                        </select>
+                    </div>
+          
             <div class="form-group">
                 <label asp-for="HomeAddress" class="control-label"></label>
-                <input asp-for="HomeAddress" class="form-control" />
+                <textarea asp-for="HomeAddress" class="form-control" cols="100" rows="6"></textarea>
                 <span asp-validation-for="HomeAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ResidentailAddress" class="control-label"></label>
-                <input asp-for="ResidentailAddress" class="form-control" />
+                <textarea asp-for="ResidentailAddress" class="form-control" cols="100" rows="6"></textarea>
                 <span asp-validation-for="ResidentailAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -68,6 +94,7 @@
             <div class="text-center mb-3">
                 <img class="rounded img-thumbnail" alt="Image Preview" id="ImagePreview" style="display:none;margin:0 auto" height=350 width="350">
             </div>
+            <hr />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -82,7 +109,7 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-<script>
+    <script>
     function ShowPreview(event) {
         if (event.target.files.length > 0) {
             var name = event.target.files[0].name;
@@ -117,6 +144,6 @@
             }
         });
     });
-    
-</script>
+
+    </script>
 }

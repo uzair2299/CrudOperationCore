@@ -11,7 +11,8 @@ namespace CrudOperationCore
     {
         List<User> GetUser(int pageNo);
         User GetUserByID(int UserId);
-        bool InsertUser(User user);
+        //User InsertUser(User user);
+        Task<User> InsertUser(User user);
         bool DeleteUser(int UserId);
         bool UpdateUser(User user);
         int TotalUser();
