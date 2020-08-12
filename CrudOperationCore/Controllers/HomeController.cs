@@ -64,27 +64,34 @@ namespace CrudOperationCore.Controllers
         [HttpPost]
         public IActionResult RegisterUser(UserViewModel userViewModel)
         {
-            var fileName = UploadedFile(userViewModel.ProfileImage);
-            User user = new User()
+            if (ModelState.IsValid)
             {
-                
-                Name = userViewModel.Name,
-                FatherName = userViewModel.FatherName,
-                Email = userViewModel.Email,
-                ContactNo = userViewModel.ContactNo,
-                HomeAddress = userViewModel.HomeAddress,
-                ResidentailAddress = userViewModel.ResidentailAddress,
-                ProfileIamge = fileName
-            };
+                var fileName = UploadedFile(userViewModel.ProfileImage);
+                User user = new User()
+                {
 
-            var result =_user.InsertUser(user);
-            if (result!=null)
-            {
-                return RedirectToAction("Details",new { id=result.Result.UserId});
+                    Name = userViewModel.Name,
+                    FatherName = userViewModel.FatherName,
+                    Email = userViewModel.Email,
+                    ContactNo = userViewModel.ContactNo,
+                    HomeAddress = userViewModel.HomeAddress,
+                    ResidentailAddress = userViewModel.ResidentailAddress,
+                    ProfileIamge = fileName
+                };
+
+                var result = _user.InsertUser(user);
+                if (result != null)
+                {
+                    return RedirectToAction("Details", new { id = result.Result.UserId });
+                }
+                else
+                {
+                    return BadRequest();
+                }
             }
             else
             {
-                return View(user);
+                return View();
             }
             
         }
@@ -180,7 +187,12 @@ namespace CrudOperationCore.Controllers
                 IEnumerable<SelectListItem> cities = _cityRepository.GetCities(ProvinceId);
                 return Json(cities);
             }
-            return null;
+            else
+            {
+                IEnumerable<SelectListItem> cities = _cityRepository.GetCitiesEmpty();
+                return Json(cities);
+            }
+          
         }
 
         private string UploadedFile(IFormFile ProfileImage)

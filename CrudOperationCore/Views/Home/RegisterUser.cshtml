@@ -9,7 +9,8 @@
 <div class="row justify-content-center align-items-center">
     <div class="col-md-6">
         <form asp-action="RegisterUser" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div asp-validation-summary="All" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
             <div class="form-row">
                 <div class="col">
                     <div class="form-group">
@@ -51,6 +52,7 @@
 
                         <select asp-for="SelectedProvince" asp-items="Model.ProvincesList" class="form-control">
                         </select>
+                        <span asp-validation-for="SelectedProvince" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col">
@@ -59,20 +61,21 @@
 
                         <select asp-for="SelectedCity" asp-items="Model.CitiesList" class="form-control">
                         </select>
+                        <span asp-validation-for="SelectedCity" class="text-danger"></span>
                     </div>
                 </div>
-
             </div>
 
             <div class="form-group">
-                        <label asp-for="IsAttendSchool"></label>
-                        <select asp-for="IsAttendSchool" class="form-control">
-                            <option value="">Choose Right Option</option>
-                            <option value="true">Yes Attended School</option>
-                            <option value="false">Sorry Not Attended School</option>
-                        </select>
-                    </div>
-          
+                <label asp-for="IsAttendSchool"></label>
+                <select asp-for="IsAttendSchool" class="form-control">
+                    <option value="">Choose Right Option</option>
+                    <option value="true">Yes Attended School</option>
+                    <option value="false">Sorry Not Attended School</option>
+                </select>
+                <span asp-validation-for="IsAttendSchool" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <label asp-for="HomeAddress" class="control-label"></label>
                 <textarea asp-for="HomeAddress" class="form-control" cols="100" rows="6"></textarea>
@@ -109,7 +112,7 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    <script>
+<script>
     function ShowPreview(event) {
         if (event.target.files.length > 0) {
             var name = event.target.files[0].name;
@@ -132,7 +135,19 @@
             if (_SelectedProvince != null && _SelectedProvince != '') {
                 $.getJSON('@Url.Action("GetCities")', { ProvinceId: _SelectedProvince }, function (cities) {
                     debugger;
-                    if (cities != null && !jQuery.isEmptyObject(cities)){
+                    if (cities != null && !jQuery.isEmptyObject(cities)) {
+                        $.each(cities, function (index, city) {
+                            _SelectedCity.append($('<option/>', {
+                                value: city.value,
+                                text: city.text
+                            }));
+                        });
+                    }
+                });
+            } else {
+                 $.getJSON('@Url.Action("GetCities")', { ProvinceId: _SelectedProvince }, function (cities) {
+                    debugger;
+                    if (cities != null && !jQuery.isEmptyObject(cities)) {
                         $.each(cities, function (index, city) {
                             _SelectedCity.append($('<option/>', {
                                 value: city.value,
@@ -145,5 +160,5 @@
         });
     });
 
-    </script>
+</script>
 }

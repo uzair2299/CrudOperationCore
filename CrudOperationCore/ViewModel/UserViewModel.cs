@@ -19,15 +19,21 @@ namespace CrudOperationCore.ViewModel
             //CitiesList = new List<SelectListItem>();
         }
         public int UserId { get; set; }
+
+        [Required(ErrorMessage = "Please enter your name")]
         [Display(Name = "User Name")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Please enter your father name")]
         [Display(Name = "Father Name")]
         public string FatherName { get; set; }
 
+        [Required(ErrorMessage = "Please enter your contact #")]
         [Display(Name = "Contact # ")]
         public string ContactNo { get; set; }
 
         [EmailAddress]
+        [Required(ErrorMessage = "Please enter your valid Email address")]
         [Display(Name = "User Email")]
         public string Email { get; set; }
 
@@ -42,13 +48,19 @@ namespace CrudOperationCore.ViewModel
         public String ProfileImagePath { get; set; }
 
         [Display(Name="Provice")]
+        [Required(ErrorMessage = "Please select your provice")]
         public string SelectedProvince { get; set; }
         public List<SelectListItem> ProvincesList { get; set; }
 
 
         [Display(Name = "Is School Attend")]
+        [Required(ErrorMessage = "Please specify your school status")]
+
         public bool? IsAttendSchool { get; set; }
 
+
+        [Display(Name = "City")]
+        [Required(ErrorMessage = "Please select your city")]
 
         public string SelectedCity { get; set; }
         public IEnumerable<SelectListItem> CitiesList { get; set; }

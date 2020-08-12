@@ -27,7 +27,7 @@ namespace CrudOperationCore.Models
                 }).ToList();
                 var CityTip = new SelectListItem()
                 {
-                    Value = null,
+                    Value = "",
                     Text = "---------- Select City ------------"
                 };
                 Items.Insert(0, CityTip);
@@ -64,7 +64,7 @@ namespace CrudOperationCore.Models
             {
                 new SelectListItem()
                 {
-                    Value = null,
+                    Value = "",
                     Text = "----------- Select City ------------"
                 }
             };
