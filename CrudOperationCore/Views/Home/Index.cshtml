@@ -1,5 +1,4 @@
 ﻿@model CrudOperationCore.ViewModel.UserListViewModel
-
 @{
     ViewData["Title"] = "Index";
     int counter = 0;
@@ -20,95 +19,95 @@
 @if (Model.UserViewModel.Count > 0)
 {<div class="container">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayName("#")
-                </th>
-                <th>
-                    @Html.DisplayName("Name")
-                </th>
-                <th>
-                    @Html.DisplayName("Father Name")
-                </th>
-                <th>
-                    @Html.DisplayName("Contact No")
-                </th>
-                <th>
-                    @Html.DisplayName("Email")
-                </th>
-                <th>
-                    @Html.DisplayName("Profile Image")
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.UserViewModel)
-            {
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        @(++counter)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FatherName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ContactNo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-
-                    @if (item.ProfileImagePath == null)
-                    {
-                        <td>No Image</td>
-                    }
-                    else
-                    {
-                        <td class="text-center"><img src="~/Images/@item.ProfileImagePath" class="rounded-circle" height="50" width="50" asp-append-version="true"></td>
-                    }
-
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.UserId }, new { onclick = "return confirm('Are sure wants to delete?');" })
-                    </td>
+                    <th>
+                        @Html.DisplayName("#")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Father Name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Contact No")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Email")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Profile Image")
+                    </th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    @if (Model.pager.EndPage > 1)
-    {
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-
-                @if (Model.pager.CurrentPage > 1)
-
+            </thead>
+            <tbody>
+                @foreach (var item in Model.UserViewModel)
                 {
-                    <li class="page-item"><a asp-controller="Home" asp-action="Index" asp-route-pageNo="1" class="page-link">First</a></li>
-                    <li class="page-item"><a asp-controller="Home" asp-action="Index" asp-route-pageNo="@Model.pager.CurrentPage-1" class="page-link">Previous</a></li>
-                }
-                @for (var page = Model.pager.StartPage; page <= Model.pager.EndPage; page++)
-                {
+                    <tr>
+                        <td>
+                            @(++counter)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FatherName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContactNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
 
-                    <li class="page-item"><a asp-route-pageNo="@(page)" asp-controller="Home" asp-action="Index"  class="page-link">@(page)</a></li>
-                }
+                        @if (item.ProfileImagePath == null)
+                        {
+                            <td>No Image</td>
+                        }
+                        else
+                        {
+                            <td class="text-center"><img src="~/Images/@item.ProfileImagePath" class="rounded-circle" height="50" width="50" asp-append-version="true"></td>
+                        }
 
-                @if (Model.pager.CurrentPage < Model.pager.TotalPages)
-                {
-                    <li class="page-item"><a asp-controller="Home" asp-action="Index" asp-route-pageNo="@Model.pager.CurrentPage+1" class="page-link">Previous</a></li>
-                    <li class="page-item"><a asp-controller="Home" asp-action="Index" asp-route-pageNo="@Model.pager.EndPage" class="page-link">Last</a></li>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.UserId }, new { onclick = "return confirm('Are sure wants to delete?');" })
+                        </td>
+                    </tr>
                 }
-            </ul>
-        </nav>
-    }
+            </tbody>
+        </table>
+        @if (Model.pager.EndPage > 1)
+        {
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
 
-</div>
+                    @if (Model.pager.CurrentPage > 1)
+
+                    {
+                        <li class="page-item"><a asp-controller="Home" asp-action="Index" asp-route-pageNo="1" class="page-link">First</a></li>
+                        <li class="page-item"><a asp-controller="Home" asp-action="Index" asp-route-pageNo="@Model.pager.CurrentPage-1" class="page-link">Previous</a></li>
+                    }
+                    @for (var page = Model.pager.StartPage; page <= Model.pager.EndPage; page++)
+                    {
+
+                        <li class="page-item"><a asp-route-pageNo="@(page)" asp-controller="Home" asp-action="Index" class="page-link">@(page)</a></li>
+                    }
+
+                    @if (Model.pager.CurrentPage < Model.pager.TotalPages)
+                    {
+                        <li class="page-item"><a asp-controller="Home" asp-action="Index" asp-route-pageNo="@Model.pager.CurrentPage+1" class="page-link">Previous</a></li>
+                        <li class="page-item"><a asp-controller="Home" asp-action="Index" asp-route-pageNo="@Model.pager.EndPage" class="page-link">Last</a></li>
+                    }
+                </ul>
+            </nav>
+        }
+
+    </div>
 
 }
 else

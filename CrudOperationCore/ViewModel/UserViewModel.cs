@@ -52,7 +52,13 @@ namespace CrudOperationCore.ViewModel
         public string SelectedProvince { get; set; }
         public List<SelectListItem> ProvincesList { get; set; }
 
-
+        /// <summary>
+        /// I used a nullable bool for the WillAttend property. I did this so that I could apply the
+        /// Required validation attribute.If I had used a regular bool , the value I received through model binding could be
+        /// only true or false , and I would not be able to tell whether the user had selected a value.A nullable bool has
+        /// three possible values: true , false , and null . The browser sends a null value if the user has not selected a
+        /// value, and this causes the Required attribute to report a validation error.
+        /// </summary>
         [Display(Name = "Is School Attend")]
         [Required(ErrorMessage = "Please specify your school status")]
 

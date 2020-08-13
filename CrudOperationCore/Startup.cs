@@ -29,6 +29,7 @@ namespace CrudOperationCore
                    Configuration.GetConnectionString("Core_ContextConnection")));
             services.AddTransient<IRepository, UserRepo>();
             services.AddTransient<ICityRepository, CityRepository>();
+            //services.AddMvc();
             services.AddControllersWithViews();
         }
 
