@@ -1,8 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CrudOperationCore.Interfaces;
 using CrudOperationCore.Models;
+using CrudOperationCore.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -24,11 +22,17 @@ namespace CrudOperationCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationContext>(options =>
+            //The AddDbContext extension method sets up the services provided by Entity Framework Core for the database context class
+                        services.AddDbContext<ApplicationContext>(options =>
                    options.UseSqlServer(
                    Configuration.GetConnectionString("Core_ContextConnection")));
             services.AddTransient<IRepository, UserRepo>();
             services.AddTransient<ICityRepository, CityRepository>();
+
+            //book
+            services.AddTransient<IProductRepository, EFProductRepository>();
+            //services.AddTransient<Seed>();
+
             //services.AddMvc();
             services.AddControllersWithViews();
         }
@@ -44,6 +48,8 @@ namespace CrudOperationCore
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            //The Microsoft.AspNetCore.StaticFiles package contains the functionality for handling static files,which must be enabled in the Startup class
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -56,6 +62,7 @@ namespace CrudOperationCore
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            SeedData.EnsurePopulated(app);
         }
     }
 }

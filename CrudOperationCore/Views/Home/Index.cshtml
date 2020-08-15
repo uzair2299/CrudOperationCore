@@ -1,4 +1,7 @@
 ﻿@model CrudOperationCore.ViewModel.UserListViewModel
+@*the @model expression declares the type of the model object that I will pass to the view from the action method.*@
+
+@* setting the Layout property to null is to tell MVC that the view is selfcontained and will render all of the content required for the client.*@
 @{
     ViewData["Title"] = "Index";
     int counter = 0;
