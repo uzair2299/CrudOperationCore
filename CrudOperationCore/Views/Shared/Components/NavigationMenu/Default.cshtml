@@ -1,0 +1,14 @@
+﻿@model IEnumerable<string>
+
+
+    <ul class="nav flex-column">
+        
+        <li class="nav-item"><a class="nav-link border border-dark" asp-action="index" asp-controller="EShopProduct"> All</a></li>
+        @foreach (var category in Model)
+        {
+            <li class="nav-item"><a class="nav-link" asp-action="index" asp-controller="EShopProduct" asp-route-category="@category"> @category </a></li>
+
+        }
+    </ul>
+
+    

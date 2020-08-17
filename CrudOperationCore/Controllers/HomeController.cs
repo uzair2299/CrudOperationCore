@@ -30,6 +30,7 @@ namespace CrudOperationCore.Controllers
 
         public IActionResult Index(int? pageNo)
         {
+
             int PageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
             //int hours = DateTime.Now.Hour;
             //ViewBag.Greetings = hours > 12 ? "Good Morning" : "Good Evening";
@@ -54,6 +55,7 @@ namespace CrudOperationCore.Controllers
 
         public IActionResult RegisterUser()
         {
+            ViewBag.Message = HttpContext.Session.GetString("Test");
             UserViewModel userViewModel = new UserViewModel()
             {
                 ProvincesList = _cityRepository.GetProvinces(),
