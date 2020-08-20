@@ -71,5 +71,10 @@ namespace CrudOperationCore.Models
 
             return Item;
         }
+
+        public List<Province> GetProvincesForjQuery()
+        {
+            return _ApplicationContext.Provinces.ToList();
+        }
     }
 }

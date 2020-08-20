@@ -14,10 +14,11 @@ namespace CrudOperationCore.Controllers
     public class CartController : Controller
     {
         private readonly IProductRepository productRepository;
-
+        
         public CartController(IProductRepository productRepository)
         {
             this.productRepository = productRepository;
+           
         }
 
         public IActionResult Index(string returnUrl)
@@ -37,6 +38,7 @@ namespace CrudOperationCore.Controllers
                 Cart cart = GetCart();
                 cart.AddItem(eShopProduct, 1);
                 SaveCart(cart);
+
             }
             return RedirectToAction("Index", new { returnUrl });
 

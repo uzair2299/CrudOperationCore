@@ -3,6 +3,7 @@ using CrudOperationCore.Models;
 using CrudOperationCore.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +32,7 @@ namespace CrudOperationCore
 
             //book
             services.AddTransient<IProductRepository, EFProductRepository>();
+            
             //services.AddTransient<Seed>();
 
             //services.AddMvc();
@@ -38,6 +40,9 @@ namespace CrudOperationCore
             //services.AddDistributedMemoryCache();
             services.AddMemoryCache();
             services.AddSession();
+            //services.AddSession(options => {
+            //    options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time   
+            //});
 
         }
 
@@ -70,3 +75,21 @@ namespace CrudOperationCore
         }
     }
 }
+/*
+ * SESSION IN ASP.NET CORE
+ * Web applications work on HTTP protocol and HTTP is a stateless protocol. Every HTTP request is treated as an independent request.
+ * The Server does not have knowledge about the variable values, which are being used in the previous request.
+ * 
+ * It is important to call "UseSession" method before the "UseMvc" method in Configure method of startup class.
+ * If we call “UseMvc” method before “UseSession” method, the system will throw an exception.
+ * 
+ * We can use session from HttpContext, once it is installed and configured. 
+ * To use session in controller class, we need to reference "Microsoft.AspNet.Http" in controller.
+ * There are three methods that enables us to set the session value, which are Set, SetInt32 and SetString.
+ * Same as there are three methods that  are used to retrieve the value from the session: Get, GetInt32 and GetString.
+ * 
+ * If you want to save or restore objects, Microsoft's recommendation is to convert them to JSON strings using the NewtonSoft utilities and then use SetString and GetString.
+ */
+
+
+//We need to install the stable version of “Microsoft.AspNetCore.Session.Then only we can access the session state in ASP.NET Core.
