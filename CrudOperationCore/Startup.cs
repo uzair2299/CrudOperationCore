@@ -77,6 +77,7 @@ namespace CrudOperationCore
 }
 /*
  * SESSION IN ASP.NET CORE
+ * We need to install the stable version of “Microsoft.AspNetCore.Session.Then only we can access the session state in ASP.NET Core.
  * Web applications work on HTTP protocol and HTTP is a stateless protocol. Every HTTP request is treated as an independent request.
  * The Server does not have knowledge about the variable values, which are being used in the previous request.
  * 
@@ -92,4 +93,72 @@ namespace CrudOperationCore
  */
 
 
-//We need to install the stable version of “Microsoft.AspNetCore.Session.Then only we can access the session state in ASP.NET Core.
+/*
+ * IoC CONTAINER
+ * Container responsibilities:
+ *                            Creating
+ *                            Disposing
+ * The followings are important interfaces and classes for built-in IoC container:
+ * Interfaces:
+ *             IServiceProvider   :>> IServiceProvider includes GetService method.
+ *                                    The ServiceProvider class implements IServiceProvider interface which returns registered services with the container.
+ *                                :>> We cannot instantiate ServiceProvider class because its constructors are marked with internal access modifier.
+ *                                
+ *             IServiceCollection :>> lets the IoC container know of concrete implementation
+ *                                    It should be used to resolve what Interface belongs to what implementation
+ *                                    
+ *                                    we can register application services with built-in IoC container in the Configure method of Startup class by using IServiceCollection
+ *                                    The ServiceCollection class implements IServiceCollection interface.
+ * Classes:
+ *             ServiceProvider
+ *             ServiceCollection
+ *             ServiceDescription
+ *             ServiceCollectionServiceExtensions
+ *             ServiceCollectionContainerBuilderExtensions
+ * 
+ * 
+ * Service lifetimes
+ * The service life time means how long the service will live, before it's being garbage collected. There are currently three different lifetimes:
+ *             Transient, services.AddTransient(), the service is created each time it is requested
+ *             Singleton, services.AddSingleton(), created once for the lifetime of the application
+ *             Scoped, services.AddScoped(), created once per request
+ * There are 3 variations each for AddTransient, AddScoped & AddSingleton methods:
+ *             <service, implType>() :>>This variation creates an instance of the implementation type for every dependency. 
+ *             <service>() :>> This variation is used to register a Single Type object.
+ *             <service>(factoryFunc) :>> This variation is used to register a factory function that will be invoked to create implementation objects. 
+ *                                  
+ * 
+ * 
+ * 
+ * Inject the dependency in controller action
+ * Declaring dependency through a constructor of the Controller can be expensive because the dependency is resolved every time the Controller is created,
+ * and also because not all action methods need the implementation type object.
+ * Some time, we required dependency to the particular controller action method not to throughout controller.
+ * ASP.net core MVC allows us to inject the dependency to particular action using "FromServices" attribute.
+ * This attribute tell the ASP.net core framework that parameter should be retrieve from the service container.
+ * 
+ * 
+ * 
+ *       public IActionResult Index([FromServices] IHelloWorldService helloWorldService)
+ *        {
+ *           ViewData["MyText"] = helloWorldService.SaysHello() + "Jignesh!";
+ *           return View();
+ *        }
+ * 
+ * 
+ * 
+ * 
+ * Get the service instance manually
+ * There is another way to get dependency services from the service container.
+ * In this method, service is not injected in controller constructor or in action method as parameter. 
+ * Using method "GetService" of "HttpContext.RequestServices" property, we can get dependent services configured with Service container.
+ *
+ *
+ *
+ * Dependency Injection for Single Type
+ * If you have a simple class that does not implement an Interface then it is a Single Type. In such a case you can use the Dependency Injection technique.
+ *  services.AddTransient<ProductSum>();
+ *  
+ *
+ *
+ */
