@@ -1,3 +1,9 @@
+INSERT INTO Genders(GenderName) VALUES ('Male')
+INSERT INTO Genders(GenderName) VALUES ('Female')
+
+
+
+
 INSERT INTO Cities(CityName, ProvinceId) VALUES('Quetta',1)
 INSERT INTO Cities(CityName, ProvinceId) VALUES('Turbat',1)
 INSERT INTO Cities(CityName, ProvinceId) VALUES('Chaman',1)

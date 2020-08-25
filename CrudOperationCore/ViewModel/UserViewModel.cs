@@ -1,4 +1,5 @@
 ﻿
+using CrudOperationCore.Models;
 using CrudOperationCore.Pagination;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -16,6 +17,7 @@ namespace CrudOperationCore.ViewModel
         public UserViewModel()
         {
             ProvincesList = new List<SelectListItem>();
+            Genders = new List<Gender>();
             //CitiesList = new List<SelectListItem>();
         }
         public int UserId { get; set; }
@@ -70,6 +72,10 @@ namespace CrudOperationCore.ViewModel
 
         public string SelectedCity { get; set; }
         public IEnumerable<SelectListItem> CitiesList { get; set; }
+        [Display(Name = "Gender")]
+        public int SelectedGender { get; set; }
+      
+        public List<Gender> Genders { get; set; }
 
     }
 }

@@ -20,12 +20,13 @@ namespace CrudOperationCore.Controllers
         private readonly IRepository _user;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ICityRepository _cityRepository;
-
-        public HomeController(IRepository userRepo, IWebHostEnvironment webHostEnvironment,ICityRepository cityRepository)
+        private ApplicationContext _context;
+        public HomeController(IRepository userRepo, IWebHostEnvironment webHostEnvironment,ICityRepository cityRepository,ApplicationContext applicationContext)
         {
             _user = userRepo;
             _webHostEnvironment = webHostEnvironment;
             _cityRepository = cityRepository;
+            _context = applicationContext;
         }
 
         public IActionResult Index(int? pageNo)
@@ -59,7 +60,8 @@ namespace CrudOperationCore.Controllers
             UserViewModel userViewModel = new UserViewModel()
             {
                 ProvincesList = _cityRepository.GetProvinces(),
-                CitiesList = _cityRepository.GetCitiesEmpty()
+                CitiesList = _cityRepository.GetCitiesEmpty(),
+                Genders = _context.Genders.ToList()
         };
             return View(userViewModel);
         }

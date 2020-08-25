@@ -65,16 +65,34 @@
                     </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                <label asp-for="IsAttendSchool"></label>
-                <select asp-for="IsAttendSchool" class="form-control">
-                    <option value="">Choose Right Option</option>
-                    <option value="true">Yes Attended School</option>
-                    <option value="false">Sorry Not Attended School</option>
-                </select>
-                <span asp-validation-for="IsAttendSchool" class="text-danger"></span>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <div>
+                            <label asp-for="SelectedGender"></label>
+                        </div>
+                         @foreach (var item in Model.Genders)
+                        {
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label mr-2" asp-for="SelectedGender">@item.GenderName</label>
+                        <input class="form-check-input" type="radio" asp-for="SelectedGender" value="@item.GenderId">
+                    </div>
+                        }
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="IsAttendSchool"></label>
+                        <select asp-for="IsAttendSchool" class="form-control">
+                            <option value="">Choose Right Option</option>
+                            <option value="true">Yes Attended School</option>
+                            <option value="false">Sorry Not Attended School</option>
+                        </select>
+                        <span asp-validation-for="IsAttendSchool" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
+            
 
             <div class="form-group">
                 <label asp-for="HomeAddress" class="control-label"></label>
