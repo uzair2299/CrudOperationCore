@@ -11,6 +11,8 @@ using Microsoft.Extensions.Hosting;
 
 namespace CrudOperationCore
 {
+    //ASP.NET Core application must include Startup class. It is like Global.asax in the traditional .NET application.
+    //As the name suggests, it is executed first when the application starts.
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -20,7 +22,25 @@ namespace CrudOperationCore
 
         public IConfiguration Configuration { get; }
 
+        //ASP.NET Core allows us to register our application services with IoC container, in the ConfigureServices method of the Startup class.
+        //The ConfigureServices method includes a parameter of IServiceCollection type which is used to register application services.
+        //IServiceCollection interface is an empty interface. It just inherits IList<servicedescriptor>
+        //The ServiceCollection class implements IServiceCollection interface.
         // This method gets called by the runtime. Use this method to add services to the container.
+        
+        /*
+        Understanding Service Lifetime
+        Built-in IoC container manages the lifetime of a registered service type. It automatically disposes a service instance based on the specified lifetime.
+        The built-in IoC container supports three kinds of lifetimes:
+        Singleton: IoC container will create and share a single instance of a service throughout the application's lifetime.
+        Transient: The IoC container will create a new instance of the specified service type every time you ask for it.
+        Scoped: IoC container will create an instance of the specified service type once per request and will be shared in a single request.
+        */
+        
+        /*
+        Get Services Manually
+        
+        */
         public void ConfigureServices(IServiceCollection services)
         {
             //The AddDbContext extension method sets up the services provided by Entity Framework Core for the database context class
@@ -77,12 +97,12 @@ namespace CrudOperationCore
 }
 /*
  * SESSION IN ASP.NET CORE
- * We need to install the stable version of ìMicrosoft.AspNetCore.Session.Then only we can access the session state in ASP.NET Core.
+ * We need to install the stable version of ‚ÄúMicrosoft.AspNetCore.Session.Then only we can access the session state in ASP.NET Core.
  * Web applications work on HTTP protocol and HTTP is a stateless protocol. Every HTTP request is treated as an independent request.
  * The Server does not have knowledge about the variable values, which are being used in the previous request.
  * 
  * It is important to call "UseSession" method before the "UseMvc" method in Configure method of startup class.
- * If we call ìUseMvcî method before ìUseSessionî method, the system will throw an exception.
+ * If we call ‚ÄúUseMvc‚Äù method before ‚ÄúUseSession‚Äù method, the system will throw an exception.
  * 
  * We can use session from HttpContext, once it is installed and configured. 
  * To use session in controller class, we need to reference "Microsoft.AspNet.Http" in controller.
